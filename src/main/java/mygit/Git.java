@@ -6,6 +6,7 @@ public class Git {
 		// TODO Auto-generated method stub
 		System.out.println("GitMaven项目");
 		System.out.println("修改Maven项目");
+		System.out.println("修改Maven项目并推送");
 	}
 
 }
