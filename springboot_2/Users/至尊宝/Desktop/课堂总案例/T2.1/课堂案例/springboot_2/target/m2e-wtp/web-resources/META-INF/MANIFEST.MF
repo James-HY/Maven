@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: springboot_2
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: 至尊宝
+Implementation-Vendor-Id: com.accp
+Build-Jdk: 1.8.0_152
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/springboot_2
+Created-By: Maven Integration for Eclipse
+

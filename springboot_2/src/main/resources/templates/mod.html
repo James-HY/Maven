@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>修改页面</title>
+</head>
+<body>
+		<table border="0">
+			<tr>
+				<td>学生姓名:</td>
+				<td><input type="text" id="name" name="name"/></td>
+			</tr>
+			<tr>
+				<td>创建人:</td>
+				<td><input type="text" id="createBy" name="createBy"/></td>
+			</tr>
+			<tr>
+				<td>备注:</td>
+				<td><input type="text" id="des" name="des"/></td>
+			</tr>
+			<tr>
+				<th><input id="addBtn" type="button" value="加入" /></th>
+			</tr>
+		</table>
+			<table border="0">
+			<thead>
+				<tr>
+					<th>学生姓名</th>
+					<th>创建人</th>
+					<th>备注</th>
+				</tr>
+			</thead>
+			<tbody id="cnt">
+			</tbody>
+			<tfoot>
+				<tr>
+					<th><input id="batchBtn" type="button" value="批量保存" /></th>
+				</tr>
+			</tfoot>
+		</table>
+</body>
+<script type="text/javascript" src="../../js/jquery-1.12.4.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+var id=window.sessionStorage.getItem("id");
+$.getJSON("/springboot_2/c/load",{"id":id},function(json){
+	$("#name").val(json.name);
+	$("#createBy").val(json.createBy);
+	$("#des").val(json.des);
+
+});
+$("#update").click(function(){
+	var createBy=$.trim($("#createBy").val());
+	var des=$.trim($("#des").val());
+	//组装json对象
+	var record={};
+	record["name"]=name;
+	record["createBy"]=createBy;
+	record["des"]=des;
+	
+	$.ajax("/springboot_2/c/record",{
+		type:"post",
+		dataType:"json",
+		contentType:"application/json",//非常重要
+		//序列化
+		data:JSON.stringify(person),
+		success:function(data){
+			if(data.code=="200"){
+				alert("新增成功");	
+			}
+		}
+	});
+})
+</script>
+</html>

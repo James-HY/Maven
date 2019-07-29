@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>添加</title>
+</head>
+<body>
+	  <form class="form-inline" action="" method="post">
+        <div class="form-group">
+            <label for="exampleInputName2">奖惩：</label>
+            <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe" name="jc" th:value="${jc}">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail2">学生姓名</label>
+            <input type="text" class="form-control" id="exampleInputEmail2" placeholder="请输入姓名" name="stuname" th:value="${stuname}">
+        </div>
+        <button type="submit" class="btn btn-info">查询</button>&nbsp;&nbsp;
+    </form>
+    <br>
+    <button class="btn btn-primary" id="openDialog">添加</button><br>
+	<table border="1" width="500">
+		<thead>
+			<tr style="background-color: #EFEFEF">
+				<th>序号</th>
+				<th>奖惩</th>
+				<th>学生姓名</th>
+				<th>创建人</th>
+				<th>创建时间</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody th:remove="${PAGE_INFO.list.size()==0?'none':'all-but-first'}">
+			<!-- temp,iter:${#numbers.sequence(2,50,1)} 固定 -->
+			<tr th:each="temp,iter:${PAGE_INFO.list}">
+				<td th:text="${temp.id}"></td>
+				<td th:text="${temp.des}"></td>
+				<td th:text="${temp.name}"></td>
+				<td th:text="${temp.createBy}"></td>
+				<td th:text="${#dates.format(temp.createDate,'yyyy-MM-dd')}"></td>
+				<!-- <td><img width="50" height="50" th:src="|/images/${temp.mimg}|" /></td> -->
+				<!-- 1.|/c/message/del1?mid=${temp.mid}|  【推荐】-->
+				<!-- <td><a  th:href="@{/c/message/del1(mid=${temp.mid})}">移除1</a>&nbsp;<a th:onclick="fnDel([[${temp.mid}]])" href="javascript:void(0)">移除2</a></td> -->
+				<td><a th:href="@{/c/record(id=${temp.id})}">修改</a>&nbsp;
+					<a th:href="@{/c/record(id=${temp.id})}">删除
+					<!-- <a th:onclick="fnDel([[${temp.code}]])" href="javascript:void(0)">查看2 --></a>
+				</td>
+			</tr>
+			<tr>
+				<th colspan="7" style="color:red">没有找到数据！</th>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
